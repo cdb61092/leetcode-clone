@@ -7,7 +7,11 @@ interface SubmitData {
     success: string
 }
 
-export default function CodeEditor() {
+interface CodeEditorProps {
+    code: string
+}
+
+export function CodeEditor({ code }: CodeEditorProps) {
     const editorRef = React.useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
 
     const handleEditorDidMount = (editor) => {
@@ -30,10 +34,13 @@ export default function CodeEditor() {
             <Editor
                 height={500}
                 defaultLanguage="javascript"
-                defaultValue="// some comment"
-                value={'function add(a, b) {return a + b}'}
+                defaultValue={code}
+                value={code}
                 theme={'vs-dark'}
                 onMount={handleEditorDidMount}
+                options={{
+                    autoIndent: "full",
+                }}
 
             />
 

@@ -27,7 +27,15 @@ const seed = async () => {
                             output: "[0,1]",
                             explanation: "Because nums[0] + nums[1] == 6, we return [0, 1]."
                         }
-                    ]
+                    ],
+                    starterCode: `/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+   // write code here
+}; `,
                 },
                 {
                     title: 'Valid Parentheses',
@@ -47,7 +55,14 @@ const seed = async () => {
                             input: 's = "(]"',
                             output: "false",
                         }
-                    ]
+                    ],
+                    starterCode: `/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function(s) {
+    // write code here
+};`
                 },
                 {
                     title: 'Merge Two Sorted Lists',
@@ -67,9 +82,24 @@ const seed = async () => {
                             input: 's = "(]"',
                             output: "false",
                         }
-                    ]
+                    ],
+                    starterCode: `/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} list1
+ * @param {ListNode} list2
+ * @return {ListNode}
+ */
+var mergeTwoLists = function(list1, list2) {
+      // write code here
+};`,
                 }
-            ],
+            ]
 
         })
     } catch (error) {
