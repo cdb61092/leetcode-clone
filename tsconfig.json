@@ -16,7 +16,6 @@
     "paths": {
       "~/*": ["./app/*"]
     },
-    "type": "module",
     "noImplicitAny": false,
 
     // Remix takes care of building everything in `remix build`.
