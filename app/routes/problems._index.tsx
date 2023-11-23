@@ -25,7 +25,7 @@ export async function loader() {
 
 export default function ProblemsIndex() {
     const {problems} = useLoaderData<typeof loader>()
-    console.log(problems)
+    // console.log(problems)
     return (
         <div>
             <h1>Problems Index</h1>
@@ -40,7 +40,7 @@ export default function ProblemsIndex() {
                     {problems.map((problem) => {
                         return (
                             <TableRow key={problem.id}>
-                                <TableCell><Link to={`./${problem.title.toLowerCase().replaceAll(' ', '-')}`}> {problem.title} </Link></TableCell>
+                                <TableCell><Link to={`./${problem.id}`}> {problem.title} </Link></TableCell>
                                 <TableCell>{problem.difficulty}</TableCell>
                                 <TableCell>{problem.patterns}</TableCell>
                                 <TableCell>{problem.categories.join(', ')}</TableCell>
