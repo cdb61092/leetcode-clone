@@ -1,6 +1,6 @@
 import { prisma } from "~/utils/db.server";
 import { json } from "@remix-run/node";
-import {useLoaderData} from "@remix-run/react";
+import {useLoaderData, Link, Outlet} from "@remix-run/react";
 import {
     Table,
     TableHeader,
@@ -12,9 +12,15 @@ import {
 
 export async function loader() {
     const problems = await prisma.problem.findMany();
+    const problemsWithLinks = problems.map((problem) => {
+        return {
+            ...problem,
+            link: problem.title.toLowerCase().replaceAll(' ', '-')
+        }
+    });
 
 
-    return json({problems});
+    return json({problems: problemsWithLinks});
 }
 
 export default function ProblemsIndex() {
@@ -34,7 +40,7 @@ export default function ProblemsIndex() {
                     {problems.map((problem) => {
                         return (
                             <TableRow key={problem.id}>
-                                <TableCell>{problem.title}</TableCell>
+                                <TableCell><Link to={`./${problem.title.toLowerCase().replaceAll(' ', '-')}`}> {problem.title} </Link></TableCell>
                                 <TableCell>{problem.difficulty}</TableCell>
                                 <TableCell>{problem.patterns}</TableCell>
                                 <TableCell>{problem.categories.join(', ')}</TableCell>
@@ -43,6 +49,7 @@ export default function ProblemsIndex() {
                     })}
                 </TableBody>
             </Table>
+            <Outlet />
         </div>
     )
 }
