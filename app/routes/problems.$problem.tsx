@@ -2,10 +2,9 @@ import { CodeEditor } from "~/components/Editor";
 import {useLoaderData} from "@remix-run/react";
 import {prisma} from "~/utils/db.server";
 import {json} from "@remix-run/node";
+import {BiMoon} from "react-icons/bi/index.js";
 
 export async function loader({params}) {
-
-    console.log(params)
     const problem = await prisma.problem.findUnique({
         where: {
             id: Number(params.problem)
@@ -21,7 +20,7 @@ export default function Problem() {
     // console.log(problem)
   return (
     <>
-      <h1>Problem</h1>
+      <h1>Problem</h1><BiMoon size={100}/>
         <CodeEditor code={problem?.starterCode ?? ''}/>
     </>
   );
