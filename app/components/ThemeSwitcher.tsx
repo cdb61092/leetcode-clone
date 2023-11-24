@@ -16,7 +16,7 @@ export const ThemeSwitcher = () => {
             <Button isIconOnly size={'lg'}
                 className="m-2 p-2 bg-transparent"
                 onClick={toggleTheme}>
-                    {theme === 'dark' ? <BiSolidMoon size={100} /> : <WiDaySunny size={100} />}
+                    {theme === 'dark' ?  <WiDaySunny size={100} /> : <BiSolidMoon size={100} />}
             </Button>
         </div>
     )
