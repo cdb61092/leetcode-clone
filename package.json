@@ -22,8 +22,10 @@
     "@uiw/react-textarea-code-editor": "^2.1.9",
     "framer-motion": "^10.16.5",
     "isbot": "^3.6.8",
+    "next-themes": "^0.2.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.3.0",

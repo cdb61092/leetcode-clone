@@ -37,7 +37,7 @@ export default function CodeEditor() {
 
             />
 
-                <button type={'submit'} onClick={handleSubmit}>Submit Code</button>
+                <button className="rounded m-3 py-2 px-2 mt-2 text-white bg-black" type={'submit'} onClick={handleSubmit}>Submit Code</button>
 
             <div>hello {fetcher.data?.success}</div>
 
