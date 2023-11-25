@@ -20,15 +20,16 @@ model User {
 }
 
 model Problem {
-  id          Int        @id @default(autoincrement())
-  title       String
-  difficulty  Difficulty
-  categories  String[]
-  patterns    Pattern[]
-  examples    Json[]
-  starterCode String
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id           Int        @id @default(autoincrement())
+  title        String
+  difficulty   Difficulty
+  categories   String[]
+  patterns     Pattern[]
+  examples     Json[]
+  starterCode  String
+  functionName String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 }
 
 enum Difficulty {
