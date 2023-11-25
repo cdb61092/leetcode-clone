@@ -1,1 +1,7 @@
 add react split pane
+error boundaries for problems$.problem route
+set up theme
+switch back from ids in route to problem name
+add dots to center of split pane gutter
+create problem description component
+switch from boofed Function to docker container for evaluating submissions

@@ -11,12 +11,13 @@ import {
 import type { LinksFunction } from "@remix-run/node";
 import { NextUIProvider } from "@nextui-org/react";
 import stylesheet from "~/tailwind.css";
+import global from "~/global.css";
 import { Header } from "~/components/Header";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { ThemeSwitcher } from "./components/ThemeSwitcher";
 
 export const links: LinksFunction = () => [
     { rel: "stylesheet", href: stylesheet },
+    { rel: "stylesheet", href: global },
 ];
 
 

@@ -1,34 +1,12 @@
 import React from "react";
 import Editor from '@monaco-editor/react';
-import type * as monaco from 'monaco-editor';
-import {useFetcher} from "@remix-run/react";
-
-interface SubmitData {
-    success: string
-}
 
 interface CodeEditorProps {
-    code: string
+    code: string,
+    onMount: (editor: any, monaco: any) => void
 }
 
-export function CodeEditor({ code }: CodeEditorProps) {
-    const editorRef = React.useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
-
-    const handleEditorDidMount = (editor) => {
-        editorRef.current = editor;
-    }
-
-    const fetcher = useFetcher<SubmitData>()
-
-    function handleSubmit(): void {
-
-        const code = editorRef.current?.getValue() as string
-
-        fetcher.submit({ code }, {'method': 'POST', action: '?index'})
-
-        console.log({fetcherData: fetcher.data})
-    }
-
+export function CodeEditor({ code, onMount }: CodeEditorProps) {
     return (
         <>
             <Editor
@@ -37,16 +15,14 @@ export function CodeEditor({ code }: CodeEditorProps) {
                 defaultValue={code}
                 value={code}
                 theme={'vs-dark'}
-                onMount={handleEditorDidMount}
+                onMount={onMount}
                 options={{
                     autoIndent: "full",
                 }}
 
             />
 
-                <button className="rounded m-3 py-2 px-2 mt-2 text-white bg-black" type={'submit'} onClick={handleSubmit}>Submit Code</button>
 
-            <div>hello {fetcher.data?.success}</div>
 
 
         </>
