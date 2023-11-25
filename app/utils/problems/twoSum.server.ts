@@ -25,6 +25,6 @@ export const twoSum = (fn) => {
         return true;
     } catch (error: any) {
         console.log("twoSum handler function error");
-        throw new Error(error);
+        return {error: error};
     }
 }
