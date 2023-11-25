@@ -1,12 +1,13 @@
 import {CodeEditor} from "~/components/Editor";
-import {useLoaderData, useFetcher
+import {
+    useLoaderData, useFetcher
 } from "@remix-run/react";
 import {prisma} from "~/utils/db.server";
 import {json} from "@remix-run/node";
 import Split from 'react-split'
 import React from "react";
 import {problems} from "~/utils/problems/index.server";
-import * as monaco from 'monaco-editor';
+import type * as monaco from 'monaco-editor';
 
 export async function loader({params}) {
     const problem = await prisma.problem.findUnique({
@@ -18,26 +19,39 @@ export async function loader({params}) {
 }
 
 export async function action({request, params}) {
-    console.log(request);
-    console.log(params);
+    const problem = await prisma.problem.findUnique({
+        where: {
+            id: Number(params.problem)
+        }
+    });
+
+    if (!problem) {
+        throw new Error('Problem not found');
+    }
     const formData = await request.formData();
-    console.log(formData);
+
+    const code = formData.get('code');
+
+    // eslint-disable-next-line no-new-func
+    const fn = new Function(`${code} \n return ${problem?.functionName}`)();
+
+    const handler = problems[problem.id]
+
+    const res = handler(fn);
+
+    return json({success: !res.error});
 }
 
 export default function Problem() {
     const {problem} = useLoaderData<typeof loader>();
-    const fetcher = useFetcher();
     const editorRef = React.useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
+    const fetcher = useFetcher();
+    const data = fetcher.data
+
+    console.log(data);
 
     function handleEditorDidMount(editor, monaco) {
         editorRef.current = editor;
-    }
-
-    function showValue() {
-        if (!editorRef.current) {
-            throw new Error('Editor not found');
-        }
-        alert(editorRef.current.getValue());
     }
 
     if (!problem) {
@@ -45,8 +59,16 @@ export default function Problem() {
     }
 
     function submitCode() {
-        fetcher.submit({});
-        console.log('in submitCode');
+        if (!editorRef.current) {
+            throw new Error('Editor not found');
+        }
+
+        const code = editorRef.current.getValue();
+
+        fetcher.submit({
+            code: code
+        }, { method: "post" });
+
     }
 
     return (
@@ -68,14 +90,12 @@ export default function Problem() {
                 <div>
                     <CodeEditor code={problem.starterCode} onMount={handleEditorDidMount}/>
                     <div className='w-100 h-3 bg-background'>
-
-                            <button className="rounded m-3 py-2 px-2 mt-2 text-white bg-black" type='submit' onClick={submitCode}>Submit Code</button>
-
-                        <button onClick={showValue}>Show value</button>
+                        <button className="rounded m-3 py-2 px-2 mt-2 text-white bg-black" type='submit' onClick={submitCode}>Submit Code</button>
                     </div>
                 </div>
             </Split>
 
         </div>
     );
+
 }
