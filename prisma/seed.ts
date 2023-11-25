@@ -28,6 +28,7 @@ const seed = async () => {
                             explanation: "Because nums[0] + nums[1] == 6, we return [0, 1]."
                         }
                     ],
+                    functionName: 'twoSum',
                     starterCode: `/**
  * @param {number[]} nums
  * @param {number} target
@@ -56,6 +57,7 @@ var twoSum = function(nums, target) {
                             output: "false",
                         }
                     ],
+                    functionName: 'isValid',
                     starterCode: `/**
  * @param {string} s
  * @return {boolean}
@@ -83,6 +85,7 @@ var isValid = function(s) {
                             output: "false",
                         }
                     ],
+                    functionName: 'mergeTwoLists',
                     starterCode: `/**
  * Definition for singly-linked list.
  * function ListNode(val, next) {
